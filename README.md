@@ -93,6 +93,7 @@ If you want to pilot the workflow before the executable MVP exists, use the temp
 | [`docs/chatto-integration.md`](docs/chatto-integration.md) | Chatto dependency model, connector assumptions, and integration risks |
 | [`docs/chatto-message-format.md`](docs/chatto-message-format.md) | Chatto thread messages, approval commands, parsing rules, and ambiguity handling |
 | [`docs/github-app-design.md`](docs/github-app-design.md) | GitHub App permissions, evidence packets, readiness checks, and fork behavior |
+| [`docs/github-app-setup.md`](docs/github-app-setup.md) | Manual GitHub App creation, installation, private key, webhook, and config setup |
 | [`docs/evidence-packet-format.md`](docs/evidence-packet-format.md) | Sticky PR comment, check run body, packet versioning, and partial-data rendering |
 | [`docs/readiness-evaluator.md`](docs/readiness-evaluator.md) | Deterministic readiness decision tree and conflict resolution |
 | [`docs/runtime-architecture.md`](docs/runtime-architecture.md) | MVP process model, SQLite state, connectors, workers, and deployment |

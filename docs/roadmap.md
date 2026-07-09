@@ -20,6 +20,7 @@
 - Chatto message format from `docs/chatto-message-format.md`
 - GitHub App scaffold
 - GitHub App permissions from `docs/github-app-design.md`
+- GitHub App setup guide from `docs/github-app-setup.md`
 - Repo room binding
 - PR thread creation
 - Approved plan storage

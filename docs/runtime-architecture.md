@@ -74,6 +74,7 @@ Latest-value state:
 - repo bindings
 - Chatto room/thread bindings
 - Chatto per-gate decision state
+- GitHub App installation bindings
 - GitHub PR bindings
 - current GitHub PR state
 - current GitHub check/status state
@@ -96,6 +97,8 @@ All inputs should normalize into the same internal event log:
 | Manual admin action | CLI or future admin UI | AgentRoom core |
 
 The readiness evaluator consumes the event log plus SQLite latest-value state to compute the session state.
+
+The local file watcher should be enabled by default in the MVP because the first agent adapter is a generic local event stream. Production deployments can disable it with `agent_events.file_watch_enabled = false` when they only accept authenticated HTTP submissions.
 
 ## Chatto connector runtime
 
@@ -177,4 +180,4 @@ MVP deployment should support:
 
 ## Open questions
 
-- Should the file watcher be enabled by default or only in local/dev mode?
+- Should `/ar refresh` and `/ar link` be supported through GitHub PR comments in Milestone 1?

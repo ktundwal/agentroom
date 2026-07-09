@@ -67,6 +67,20 @@ Latest PR snapshot for evaluator reads.
 | `changed_files_json` | Latest changed-file summary. |
 | `updated_at` | Last GitHub refresh time. |
 
+### `github_installation_state`
+
+Latest GitHub App installation binding for configured repositories.
+
+| Column | Purpose |
+| --- | --- |
+| `repo` | GitHub `owner/name`. |
+| `installation_id` | GitHub App installation ID for the repo owner/repo. |
+| `account_login` | User or organization where the App is installed. |
+| `permissions_json` | Granted permission snapshot used by `agentroom doctor`. |
+| `repository_selection` | `all` or `selected`. |
+| `suspended` | Whether the installation is suspended. |
+| `updated_at` | Last installation webhook or discovery refresh time. |
+
 ### `github_check_state`
 
 Latest check/status state per PR head SHA.
@@ -155,11 +169,12 @@ The readiness evaluator should read:
 
 1. `sessions`
 2. `github_pr_state`
-3. `github_check_state`
-4. `github_review_state`
-5. `chatto_thread_state`
-6. `chatto_gate_state`
-7. relevant recent `event_log` entries for provenance and evidence notes
+3. `github_installation_state`
+4. `github_check_state`
+5. `github_review_state`
+6. `chatto_thread_state`
+7. `chatto_gate_state`
+8. relevant recent `event_log` entries for provenance and evidence notes
 
 It should not call GitHub or Chatto directly. If state is stale, the evaluator should return `blocked` or `risky` with a stale-data reason and let connectors refresh facts.
 

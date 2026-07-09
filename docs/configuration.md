@@ -19,6 +19,8 @@ AGENTROOM_CONFIG=/path/to/agentroom.toml agentroom server
 
 `agentroom init` should create `./agentroom.toml` by default and should never write secret values into the file.
 
+See [`github-app-setup.md`](github-app-setup.md) for creating the GitHub App values referenced by the `[github]` section.
+
 ## Format
 
 Use TOML because it is readable, supports comments, and is common for self-hosted infrastructure tools.
@@ -105,7 +107,8 @@ AgentRoom reads the named environment variables at startup. `agentroom doctor` s
 2. Create `.agentroom/events.ndjson` if file watching is enabled.
 3. Create the SQLite parent directory.
 4. Print the environment variables the user must set.
-5. Refuse to overwrite an existing config unless `--force` is passed.
+5. Print the next step to create or verify the GitHub App using [`github-app-setup.md`](github-app-setup.md).
+6. Refuse to overwrite an existing config unless `--force` is passed.
 
 It should not:
 

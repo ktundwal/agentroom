@@ -71,6 +71,7 @@ open docs/agent-adapter-contract.md
 open docs/chatto-integration.md
 open docs/chatto-message-format.md
 open docs/github-app-design.md
+open docs/github-app-setup.md
 open docs/evidence-packet-format.md
 open docs/readiness-evaluator.md
 open docs/runtime-architecture.md
@@ -93,6 +94,20 @@ Expected configuration:
 - realtime WebSocket access, with polling fallback if needed
 
 A bundled `docker compose` setup that starts AgentRoom and Chatto together can come later, after the connector proves useful against an existing Chatto instance.
+
+## GitHub App setup model
+
+The MVP needs a manually created GitHub App before AgentRoom can receive webhooks or publish readiness checks.
+
+Expected setup:
+
+- create a GitHub App with the permissions and webhook events from [`github-app-design.md`](github-app-design.md)
+- set the webhook URL to `<server.public_url>/webhooks/github`
+- generate a private key and keep it out of git
+- install the App on the repositories AgentRoom supervises
+- put `github.app_id`, `github.private_key_pem_path`, and `github.webhook_secret_env` in `agentroom.toml`
+
+Follow [`github-app-setup.md`](github-app-setup.md) for the full first-user flow.
 
 ## First implementation target
 

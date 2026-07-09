@@ -2,6 +2,8 @@
 
 AgentRoom should use GitHub as the source of truth for pull requests, checks, reviews, branch protection, and final merge.
 
+See [`github-app-setup.md`](github-app-setup.md) for the manual first-user setup flow: creating the GitHub App, setting permissions, subscribing to webhook events, generating the private key, installing the App, and wiring `agentroom.toml`.
+
 ## MVP responsibility
 
 The GitHub App should do four things:
@@ -106,6 +108,7 @@ For MVP, AgentRoom can support same-repo PRs first and classify fork PRs as `ris
 GitHub webhooks can be retried and delivered out of order. AgentRoom should:
 
 - store GitHub delivery IDs
+- discover and store GitHub App installations for configured repositories
 - deduplicate webhook events
 - fetch current PR state before publishing readiness
 - update the sticky PR comment rather than creating new comments
