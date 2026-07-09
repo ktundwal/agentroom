@@ -64,3 +64,11 @@
 - Evidence packet customization
 - Audit export
 - Public dogfooding examples
+
+## Future: Cross-harness agent review rooms
+
+- Structured review rounds for Copilot CLI, Mimo, Fleet, Claude Code, and other harnesses
+- Named agent findings, responses, consensus, disagreements, and unresolved questions
+- Human resolution commands in Chatto
+- Evidence packet summaries for cross-harness convergence
+- See [`superpowers/specs/2026-07-09-cross-harness-agent-review-room-design.md`](superpowers/specs/2026-07-09-cross-harness-agent-review-room-design.md)

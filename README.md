@@ -102,6 +102,7 @@ If you want to pilot the workflow before the executable MVP exists, use the temp
 | [`docs/test-strategy.md`](docs/test-strategy.md) | Unit, connector, renderer, fixture E2E, idempotency, and live-test strategy |
 | [`docs/security.md`](docs/security.md) | Trust, safety, and approval model |
 | [`docs/roadmap.md`](docs/roadmap.md) | Initial development milestones |
+| [`docs/superpowers/specs/2026-07-09-cross-harness-agent-review-room-design.md`](docs/superpowers/specs/2026-07-09-cross-harness-agent-review-room-design.md) | Future cross-harness agent review room extension |
 | [`docs/templates/`](docs/templates) | Manual pilot templates |
 
 ## License
