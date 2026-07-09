@@ -119,6 +119,8 @@ See [`github-app-design.md`](github-app-design.md) for the GitHub App permission
 The MVP runtime should be a single long-running `agentroom server` process with an HTTP webhook receiver, local agent-event ingestion, Chatto connector worker, readiness evaluator, evidence publisher, and SQLite event store.
 
 See [`runtime-architecture.md`](runtime-architecture.md) for process boundaries, state sharing, deployment mode, and non-goals.
+See [`state-model.md`](state-model.md) for append-only event history, latest-value runtime state, and the evaluator read path.
+See [`configuration.md`](configuration.md) for the TOML config schema used by `agentroom init` and `agentroom server`.
 
 ## MVP boundary
 

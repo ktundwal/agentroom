@@ -30,7 +30,7 @@ agentroom server
   ├─ Chatto connector worker
   ├─ readiness evaluator
   ├─ evidence publisher
-  └─ SQLite event store
+  └─ SQLite event store and runtime state
 ```
 
 The CLI should provide setup and diagnostics:
@@ -46,18 +46,29 @@ agentroom emit-fixture
 
 Use SQLite for the first runtime.
 
-SQLite stores:
+SQLite stores append-only history and latest-value runtime state.
+
+Append-only history:
 
 - append-only event log
+- evidence packet versions
+- readiness state snapshots
+
+Latest-value state:
+
 - sessions
 - repo bindings
 - Chatto room/thread bindings
 - GitHub PR bindings
+- current GitHub PR state
+- current GitHub check/status state
+- current GitHub review state
+- current Chatto decision state
 - processed GitHub delivery IDs
-- evidence packet versions
-- readiness state snapshots
 
 SQLite is enough for a single self-hosted AgentRoom instance and avoids introducing a second infrastructure dependency before the merge-confidence loop is proven.
+
+See [`state-model.md`](state-model.md) for the table responsibilities and evaluator read path.
 
 ## Event ingestion
 
@@ -70,7 +81,7 @@ All inputs should normalize into the same internal event log:
 | Chatto decision | Chatto realtime listener or polling worker | Chatto connector |
 | Manual admin action | CLI or future admin UI | AgentRoom core |
 
-The readiness evaluator consumes the event log and current GitHub state to compute the session state.
+The readiness evaluator consumes the event log plus SQLite latest-value state to compute the session state.
 
 ## Chatto connector runtime
 
@@ -103,6 +114,7 @@ Responsibilities:
 - deduplicate delivery IDs
 - fetch current PR/check/review state before evaluating readiness
 - write GitHub-derived events to the event log
+- update latest-value GitHub PR, check, and review tables
 - update the sticky PR evidence comment
 - update the `AgentRoom readiness` check run
 
@@ -117,7 +129,7 @@ The connector writes events such as:
 
 ## Readiness evaluator
 
-The readiness evaluator should be deterministic. Given event log state plus current GitHub facts, it should compute:
+The readiness evaluator should be deterministic. Given event log state plus latest-value GitHub and Chatto facts from SQLite, it should compute:
 
 - current readiness state
 - blockers
@@ -125,14 +137,14 @@ The readiness evaluator should be deterministic. Given event log state plus curr
 - evidence packet content
 - GitHub check conclusion
 
-The evaluator should not call external services directly. Connectors gather facts; the evaluator decides.
+The evaluator should not call external services directly. Connectors gather facts and update latest-value state; the evaluator decides.
 
 ## Deployment
 
 MVP deployment should support:
 
 1. User runs or already has Chatto.
-2. User creates AgentRoom config with Chatto URL, GitHub App credentials, webhook secret, and SQLite path.
+2. User creates AgentRoom TOML config with Chatto URL, GitHub App credentials, webhook secret env var, repo bindings, and SQLite path.
 3. User starts `agentroom server`.
 4. User exposes `/webhooks/github` to GitHub.
 5. User emits fixture agent events or connects a local agent script.
@@ -151,5 +163,5 @@ MVP deployment should support:
 
 - Which language should the first binary use?
 - Should the file watcher be enabled by default or only in local/dev mode?
-- Should SQLite migrations be embedded in the binary?
-- What configuration format should `agentroom init` produce?
+- Which language should the first binary use?
+- Should the file watcher be enabled by default or only in local/dev mode?

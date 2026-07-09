@@ -71,6 +71,8 @@ open docs/agent-adapter-contract.md
 open docs/chatto-integration.md
 open docs/github-app-design.md
 open docs/runtime-architecture.md
+open docs/state-model.md
+open docs/configuration.md
 open docs/security.md
 ```
 
