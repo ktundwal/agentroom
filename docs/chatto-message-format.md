@@ -4,6 +4,8 @@ Chatto is AgentRoom's primary collaboration surface. Messages must be structured
 
 The MVP should use plain text / Markdown messages posted by the dedicated AgentRoom Chatto user. It should not depend on native Chatto slash commands, custom cards, or first-class bot interactions.
 
+This document is the product contract for Chatto-side human interaction. The Chatto connector, parser tests, Chatto-backed E2E tests, and evidence links should conform to this format rather than redefining commands elsewhere.
+
 ## Thread model
 
 Each agent-authored PR gets one Chatto thread.
@@ -149,6 +151,7 @@ The event payload should include:
 - human Chatto user
 - parsed command
 - reason or instruction when present
+- observation mode: `realtime` or `polling`
 
 ## Security notes
 

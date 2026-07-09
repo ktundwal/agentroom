@@ -37,9 +37,12 @@ Chatto connector:
 
 - posts thread root, approval request, parse-error, and readiness summary messages through a fake Chatto client
 - parses accepted `/ar ...` commands
+- validates messages against `docs/chatto-message-format.md`
 - ignores ambiguous replies
+- ignores valid-looking commands in the wrong room or thread
 - ignores replies from the AgentRoom connector user
 - translates accepted commands into AgentRoom events
+- records whether an event was observed through realtime or polling
 - keeps room/thread/message IDs in event payloads
 
 Agent event ingestion:
@@ -103,10 +106,25 @@ Required flow:
 4. Ingest fixture agent events and deterministic GitHub fixture events.
 5. AgentRoom posts the Chatto thread root and approval request.
 6. Playwright logs in as a maintainer and replies `/ar approve <decision-id>` through the real Chatto UI.
-7. AgentRoom observes the Chatto reply through the connector's realtime listener or polling fallback.
+7. AgentRoom observes the Chatto reply through a forced connector observation mode.
 8. AgentRoom writes the Chatto-derived approval event, recomputes readiness, and republishes evidence.
 
 This test must not synthesize the Chatto approval event. The approval event is valid only if it includes the real Chatto room ID, thread ID, message ID, actor, gate, decision ID, and parsed command.
+
+The happy path must run in both modes:
+
+```sh
+CHATTO_CONNECTOR_OBSERVATION_MODE=realtime
+CHATTO_CONNECTOR_OBSERVATION_MODE=polling
+```
+
+The event log must record the mode that observed the message, and the test must assert it.
+
+Required negative Chatto-backed E2E scenarios:
+
+- malformed human command in the correct thread is ignored, produces the documented parse-error clarification, and does not create an approval event
+- valid-looking command in the wrong room or thread is ignored and does not create an approval event
+- connector disconnect/reconnect between approval request and human reply still creates exactly one approval event
 
 See [`superpowers/specs/2026-07-09-chatto-e2e-design.md`](superpowers/specs/2026-07-09-chatto-e2e-design.md) for the full design.
 
