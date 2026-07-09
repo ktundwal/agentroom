@@ -92,6 +92,7 @@ If you want to pilot the workflow before the executable MVP exists, use the temp
 | [`docs/agent-adapter-contract.md`](docs/agent-adapter-contract.md) | Generic agent event contract and first adapter choice |
 | [`docs/chatto-integration.md`](docs/chatto-integration.md) | Chatto dependency model, connector assumptions, and integration risks |
 | [`docs/github-app-design.md`](docs/github-app-design.md) | GitHub App permissions, evidence packets, readiness checks, and fork behavior |
+| [`docs/runtime-architecture.md`](docs/runtime-architecture.md) | MVP process model, SQLite state, connectors, workers, and deployment |
 | [`docs/security.md`](docs/security.md) | Trust, safety, and approval model |
 | [`docs/roadmap.md`](docs/roadmap.md) | Initial development milestones |
 | [`docs/templates/`](docs/templates) | Manual pilot templates |

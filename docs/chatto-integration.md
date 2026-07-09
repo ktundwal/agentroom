@@ -64,6 +64,8 @@ The boundary should support:
 - post status update
 - post approval request
 - read human decision
+- translate human decision into an AgentRoom event
+- write the event to the shared event log
 - link back to GitHub PR evidence
 
 This keeps AgentRoom from depending on unofficial Chatto internals and leaves room for future Slack, Discord, Matrix, or GitHub-only adapters if the market demands them.

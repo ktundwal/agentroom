@@ -11,6 +11,8 @@
 
 ## Milestone 1: Chatto repo room and GitHub evidence packet
 
+- Single-process `agentroom server`
+- SQLite event store
 - Experimental Chatto connector
 - GitHub App scaffold
 - GitHub App permissions from `docs/github-app-design.md`

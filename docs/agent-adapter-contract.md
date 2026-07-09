@@ -84,7 +84,7 @@ Start with the smallest set needed to create a useful PR thread and evidence pac
 | `evidence.note` | `markdown` | Adds agent-supplied context to the evidence packet. |
 | `session.completed` | `result` | Marks the agent side done. |
 
-GitHub supplies CI, review, and mergeability events through the GitHub App. Those should not be duplicated by the agent adapter unless the agent is reporting local pre-PR checks.
+GitHub supplies CI, review, PR, and mergeability events through the GitHub connector. Chatto supplies human approval events through the Chatto connector. Those should not be duplicated by the agent adapter unless the agent is reporting local pre-PR checks or agent-authored notes.
 
 ## Readiness mapping
 
@@ -120,8 +120,15 @@ The first implementation should include a fixture event stream that exercises th
 ```json
 {"version":"ar.agent_event.v1","event_id":"evt_001","session_id":"ar-session-001","repo":"ktundwal/agentroom","type":"session.started","occurred_at":"2026-07-09T07:00:00Z","producer":{"kind":"agent","name":"fixture","run_id":"fixture-1"},"links":{"issue_url":"https://github.com/ktundwal/agentroom/issues/1","pull_request_url":null,"branch":"ar/docs-example"},"payload":{"goal":"Update getting started docs","requested_by":"ktundwal"}}
 {"version":"ar.agent_event.v1","event_id":"evt_002","session_id":"ar-session-001","repo":"ktundwal/agentroom","type":"plan.proposed","occurred_at":"2026-07-09T07:01:00Z","producer":{"kind":"agent","name":"fixture","run_id":"fixture-1"},"links":{"issue_url":"https://github.com/ktundwal/agentroom/issues/1","pull_request_url":null,"branch":"ar/docs-example"},"payload":{"plan_markdown":"1. Edit docs/getting-started.md\n2. Open PR\n3. Request review","risk_level":"low","sensitive_paths":[]}}
-{"version":"ar.agent_event.v1","event_id":"evt_003","session_id":"ar-session-001","repo":"ktundwal/agentroom","type":"plan.approved","occurred_at":"2026-07-09T07:02:00Z","producer":{"kind":"human","name":"ktundwal","run_id":"chatto-thread-1"},"links":{"issue_url":"https://github.com/ktundwal/agentroom/issues/1","pull_request_url":null,"branch":"ar/docs-example"},"payload":{"approved_by":"ktundwal","approval_source":"chatto"}}
 ```
+
+The corresponding Chatto connector fixture should produce the approval event after reading the human decision:
+
+```json
+{"version":"ar.agent_event.v1","event_id":"evt_003","session_id":"ar-session-001","repo":"ktundwal/agentroom","type":"plan.approved","occurred_at":"2026-07-09T07:02:00Z","producer":{"kind":"chatto_connector","name":"chatto","run_id":"chatto-thread-1"},"links":{"issue_url":"https://github.com/ktundwal/agentroom/issues/1","pull_request_url":null,"branch":"ar/docs-example"},"payload":{"approved_by":"ktundwal","approval_source":"chatto","chatto_room":"repo-docs","chatto_thread":"thread-123"}}
+```
+
+The generic agent adapter does not write this event. The Chatto connector translates the human decision into the shared event envelope.
 
 ## Open questions
 

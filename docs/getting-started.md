@@ -70,6 +70,7 @@ open docs/architecture.md
 open docs/agent-adapter-contract.md
 open docs/chatto-integration.md
 open docs/github-app-design.md
+open docs/runtime-architecture.md
 open docs/security.md
 ```
 

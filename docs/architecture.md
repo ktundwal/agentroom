@@ -60,17 +60,38 @@ Initial adapter events:
 
 - `session.started`
 - `plan.proposed`
-- `plan.approved`
-- `plan.rejected`
 - `code.started`
 - `commit.created`
+- `agent.blocked`
+- `evidence.note`
+- `session.completed`
+
+Chatto approval events and GitHub PR/check/review events are AgentRoom events, but they are not produced by coding-agent adapters.
+
+### GitHub connector events
+
+The GitHub connector owns PR, CI, review, mergeability, and evidence publication facts.
+
+Initial GitHub-derived events:
+
 - `pr.opened`
+- `pr.synchronized`
 - `ci.completed`
 - `review.completed`
+- `mergeability.changed`
+- `evidence.posted`
+
+### Chatto connector events
+
+The Chatto connector owns human decisions made in Chatto. It must translate Chatto messages, reactions, or commands into internal AgentRoom events in the same event log.
+
+Initial Chatto-derived events:
+
+- `plan.approved`
+- `plan.rejected`
 - `approval.requested`
 - `approval.granted`
 - `approval.denied`
-- `evidence.posted`
 
 ### Event log
 
@@ -93,6 +114,12 @@ The evidence packet summarizes the session for reviewers. It should be posted to
 
 See [`github-app-design.md`](github-app-design.md) for the GitHub App permissions, sticky PR comment, readiness check, branch protection behavior, and fork PR handling.
 
+### Runtime
+
+The MVP runtime should be a single long-running `agentroom server` process with an HTTP webhook receiver, local agent-event ingestion, Chatto connector worker, readiness evaluator, evidence publisher, and SQLite event store.
+
+See [`runtime-architecture.md`](runtime-architecture.md) for process boundaries, state sharing, deployment mode, and non-goals.
+
 ## MVP boundary
 
 The MVP should avoid custom CI, custom merge systems, dashboards, and multi-agent orchestration. Chatto should provide the collaboration surface, and GitHub should remain the source of truth for pull requests, checks, reviews, and merge.
@@ -101,6 +128,4 @@ The MVP should avoid custom CI, custom merge systems, dashboards, and multi-agen
 
 - Which Chatto API surface should the first connector use?
 - Which agent-specific adapter should follow the generic local event adapter?
-- Should the first runtime be a single binary, Docker Compose, or GitHub Action?
-- Should the event log begin as SQLite before moving to a server-backed store?
 - Which policies should be configurable in version one?
