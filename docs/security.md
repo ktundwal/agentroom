@@ -46,7 +46,9 @@ AgentRoom should record:
 
 ## Secret handling
 
-AgentRoom should not store provider API keys, GitHub tokens, Chatto bot credentials, or repository secrets in plaintext. The first implementation should document where credentials live and how they are scoped before supporting production use.
+AgentRoom should not store provider API keys, GitHub tokens, Chatto user credentials, or repository secrets in plaintext. The first implementation should document where credentials live and how they are scoped before supporting production use.
+
+Operator API access should be avoided for normal operation. If AgentRoom ever supports bootstrapping Chatto users through the Operator API, that setup step must run on the Chatto host or a trusted sidecar with explicit socket access, because the Operator API is root-equivalent Chatto authority.
 
 ## Failure modes to design for
 

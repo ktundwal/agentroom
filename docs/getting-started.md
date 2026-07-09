@@ -67,8 +67,23 @@ There is no application runtime yet. Start by reading:
 ```sh
 open docs/product-brief.md
 open docs/architecture.md
+open docs/chatto-integration.md
 open docs/security.md
 ```
+
+## Chatto dependency model
+
+The MVP should assume Chatto is already running. AgentRoom should connect to Chatto rather than install or operate it.
+
+Expected configuration:
+
+- Chatto server URL
+- dedicated Chatto user for AgentRoom
+- room membership for the repos AgentRoom supervises
+- credentials for public ConnectRPC calls
+- realtime WebSocket access, with polling fallback if needed
+
+A bundled `docker compose` setup that starts AgentRoom and Chatto together can come later, after the connector proves useful against an existing Chatto instance.
 
 ## First implementation target
 

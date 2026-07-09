@@ -16,11 +16,20 @@ GitHub webhook or agent event
 
 ## Core components
 
-### Chatto bot
+### Chatto connector
 
-The Chatto bot creates and updates repo rooms and PR threads. It posts agent intent, branch links, PR links, CI state, blockers, approval prompts, and readiness summaries.
+The Chatto connector creates or binds repo rooms and updates PR threads. It posts agent intent, branch links, PR links, CI state, blockers, approval prompts, and readiness summaries through a dedicated Chatto user account.
 
 Chatto is the live collaboration surface. It is not the source of truth for code, checks, reviews, or merge.
+
+Chatto does not currently appear to expose a dedicated bot/webhook API. The initial connector should use public user-facing APIs only:
+
+- post messages with ConnectRPC `MessageService.CreateMessage`
+- read message/reaction state with public ConnectRPC APIs
+- subscribe to visible events through `/api/realtime` when possible
+- fall back to polling room/thread timelines when realtime coverage is insufficient
+
+Operator API access is optional bootstrap plumbing only. It is root-equivalent, Unix-socket-only, and should not be required for normal AgentRoom operation.
 
 ### GitHub App
 
@@ -86,7 +95,7 @@ The MVP should avoid custom CI, custom merge systems, dashboards, and multi-agen
 
 ## Open questions
 
-- Which Chatto API surface should the first bot use?
+- Which Chatto API surface should the first connector use?
 - Which coding agent adapter should be built first?
 - Should the first runtime be a single binary, Docker Compose, or GitHub Action?
 - Should the event log begin as SQLite before moving to a server-backed store?

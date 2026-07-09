@@ -11,7 +11,7 @@
 
 ## Milestone 1: Chatto repo room and GitHub evidence packet
 
-- Chatto bot scaffold
+- Experimental Chatto connector
 - GitHub App scaffold
 - Repo room binding
 - PR thread creation
@@ -34,6 +34,7 @@
 - First coding-agent adapter or runner bridge
 - Event ingestion
 - Chatto status updates
+- Realtime Chatto event listener or timeline polling fallback
 
 ## Milestone 4: Self-hosted runtime
 

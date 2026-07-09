@@ -4,9 +4,23 @@
 
 AI coding agents can now create branches and pull requests faster than humans can supervise them. The bottleneck is no longer writing code. It is knowing which agent PR is ready, blocked, risky, or waiting on human judgment.
 
-AgentRoom uses **Chatto** as the live human/agent collaboration surface and **GitHub** as the source of truth. Each repo gets a Chatto room. Each agent-authored PR gets a thread. Agent bots post intent, plans, branch links, CI state, blockers, evidence summaries, and approval requests. Humans approve, reject, pause, or redirect from the room. AgentRoom records the decisions, applies readiness policy, tracks GitHub state, and posts evidence packets back to PRs.
+AgentRoom uses **Chatto** as the live human/agent collaboration surface and **GitHub** as the source of truth. Each repo gets a Chatto room. Each agent-authored PR gets a thread. AgentRoom posts intent, plans, branch links, CI state, blockers, evidence summaries, and approval requests through a dedicated Chatto connector account. Humans approve, reject, pause, or redirect from the room. AgentRoom records the decisions, applies readiness policy, tracks GitHub state, and posts evidence packets back to PRs.
 
 The technical bet is simple: combine Chatto's self-hosted collaboration UX and NATS-backed realtime foundation with GitHub's code-review and branch-protection model.
+
+## Chatto integration status
+
+Chatto is pre-1.0 and does not currently appear to expose a dedicated bot/webhook integration API. AgentRoom should treat Chatto integration as an adapter boundary, not a hard-coded internal dependency.
+
+Initial dependency model:
+
+1. Bring your own Chatto instance.
+2. Configure AgentRoom with a Chatto URL and a dedicated Chatto user credential.
+3. Post messages through Chatto's public ConnectRPC `MessageService`.
+4. Detect human decisions through Chatto's realtime WebSocket where possible, with timeline polling as a fallback.
+5. Keep GitHub as the source of truth for PRs, checks, reviews, and merge.
+
+See [`docs/chatto-integration.md`](docs/chatto-integration.md) for the current integration assumptions and risks.
 
 > **Tagline:** Every repo gets a room. Every agent PR gets a decision.
 
@@ -46,7 +60,7 @@ The first version should prove one narrow outcome: **connect one GitHub repo to 
 Planned MVP components:
 
 1. GitHub App
-2. Chatto bot integration
+2. Experimental Chatto connector
 3. Repo room binding
 4. PR thread creation
 5. Readiness state machine
@@ -75,6 +89,7 @@ If you want to pilot the workflow before the executable MVP exists, use the temp
 | [`docs/getting-started.md`](docs/getting-started.md) | Contributor and pilot workflow guide |
 | [`docs/product-brief.md`](docs/product-brief.md) | Product pitch, target user, wedge, and MVP |
 | [`docs/architecture.md`](docs/architecture.md) | Initial system architecture and data flow |
+| [`docs/chatto-integration.md`](docs/chatto-integration.md) | Chatto dependency model, connector assumptions, and integration risks |
 | [`docs/security.md`](docs/security.md) | Trust, safety, and approval model |
 | [`docs/roadmap.md`](docs/roadmap.md) | Initial development milestones |
 | [`docs/templates/`](docs/templates) | Manual pilot templates |

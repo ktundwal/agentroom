@@ -9,7 +9,7 @@ AgentRoom is in a docs-first planning phase. The most useful contributions are:
 - sharpening the product wedge
 - improving the manual pilot workflow
 - identifying security and trust failure modes
-- proposing the first Chatto bot and GitHub App architecture
+- proposing the first Chatto connector and GitHub App architecture
 - suggesting adapter contracts for coding agents
 
 ## Contribution workflow
