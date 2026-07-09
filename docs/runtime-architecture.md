@@ -139,6 +139,8 @@ The readiness evaluator should be deterministic. Given event log state plus late
 
 The evaluator should not call external services directly. Connectors gather facts and update latest-value state; the evaluator decides.
 
+See [`readiness-evaluator.md`](readiness-evaluator.md) for precedence, conflict resolution, head-SHA consistency, and check conclusion mapping.
+
 ## Deployment
 
 MVP deployment should support:

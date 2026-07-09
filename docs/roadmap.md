@@ -22,6 +22,7 @@
 - PR thread creation
 - Approved plan storage
 - PR evidence packet generation
+- Evidence packet format from `docs/evidence-packet-format.md`
 - CI status aggregation
 - `AgentRoom readiness` check run
 
@@ -33,6 +34,7 @@
 - Sensitive-file approval gate
 - GitHub status check integration
 - Readiness states: `needs review`, `blocked`, `risky`, `ready`
+- Deterministic evaluator from `docs/readiness-evaluator.md`
 
 ## Milestone 3: Agent event ingestion
 

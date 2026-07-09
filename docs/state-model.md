@@ -124,6 +124,7 @@ Historical readiness decisions.
 | `head_sha` | PR head SHA evaluated. |
 | `state` | `needs review`, `blocked`, `risky`, or `ready`. |
 | `blockers_json` | Structured blockers. |
+| `decision_gates_json` | Normalized gate states used for packet rendering. |
 | `evidence_version` | Evidence packet version produced from this snapshot. |
 | `created_at` | Evaluation time. |
 

@@ -88,7 +88,7 @@ GitHub supplies CI, review, PR, and mergeability events through the GitHub conne
 
 ## Readiness mapping
 
-Agent events update readiness state as follows:
+Agent events contribute to readiness, but the readiness evaluator owns the final decision.
 
 | State | Inputs |
 | --- | --- |
@@ -98,6 +98,8 @@ Agent events update readiness state as follows:
 | `ready` | plan approved, required CI passed, required review present, no unresolved risk |
 
 The state machine must treat agent claims as hints, not proof. Proof comes from GitHub checks, PR diffs, review state, and recorded human approvals.
+
+See [`readiness-evaluator.md`](readiness-evaluator.md) for the deterministic decision tree and state precedence rules.
 
 ## Evidence packet inputs
 

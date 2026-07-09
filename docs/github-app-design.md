@@ -63,6 +63,8 @@ The sticky PR comment should be updated in place. It should include:
 - unresolved blockers
 - timestamp and evidence packet version
 
+See [`evidence-packet-format.md`](evidence-packet-format.md) for the exact Markdown structure, partial-data rendering rules, evidence version format, and check run body.
+
 The check run should use:
 
 | Readiness state | GitHub check conclusion |
@@ -118,6 +120,5 @@ Future merge automation must require a separate design review and should never g
 ## Open questions
 
 - Should AgentRoom use check runs only, or also commit statuses for older workflows?
-- What exact PR comment marker should identify the sticky evidence packet?
 - Should `/ar refresh` and `/ar link` commands be supported through PR comments in Milestone 1?
 - Should fork PR support be deferred entirely or included as `risky` read-only mode?

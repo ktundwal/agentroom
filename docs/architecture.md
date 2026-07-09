@@ -113,6 +113,7 @@ Initial policies:
 The evidence packet summarizes the session for reviewers. It should be posted to the PR and updated as Chatto, GitHub, and agent events change.
 
 See [`github-app-design.md`](github-app-design.md) for the GitHub App permissions, sticky PR comment, readiness check, branch protection behavior, and fork PR handling.
+See [`evidence-packet-format.md`](evidence-packet-format.md) for the exact sticky PR comment and check run content.
 
 ### Runtime
 
@@ -120,6 +121,7 @@ The MVP runtime should be a single long-running `agentroom server` process with 
 
 See [`runtime-architecture.md`](runtime-architecture.md) for process boundaries, state sharing, deployment mode, and non-goals.
 See [`state-model.md`](state-model.md) for append-only event history, latest-value runtime state, and the evaluator read path.
+See [`readiness-evaluator.md`](readiness-evaluator.md) for deterministic readiness decisions.
 See [`configuration.md`](configuration.md) for the TOML config schema used by `agentroom init` and `agentroom server`.
 
 ## MVP boundary

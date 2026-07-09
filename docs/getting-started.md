@@ -70,6 +70,8 @@ open docs/architecture.md
 open docs/agent-adapter-contract.md
 open docs/chatto-integration.md
 open docs/github-app-design.md
+open docs/evidence-packet-format.md
+open docs/readiness-evaluator.md
 open docs/runtime-architecture.md
 open docs/state-model.md
 open docs/configuration.md
