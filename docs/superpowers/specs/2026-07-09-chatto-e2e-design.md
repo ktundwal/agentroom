@@ -180,13 +180,22 @@ The source-backed E2E suite must include negative coverage, not only the happy p
 3. The connector may observe the message, but it must not create an approval event.
 4. Readiness must remain blocked on the pending plan gate.
 
+### Auth failure fails closed
+
+1. Start Chatto normally.
+2. Start AgentRoom with an invalid or expired Chatto connector credential.
+3. AgentRoom must mark the Chatto connector unhealthy and fail readiness with a clear Chatto-auth blocker.
+4. AgentRoom must not create Chatto-derived approval events.
+5. AgentRoom must not treat missing Chatto observation as an approval or success-shaped fallback.
+
 ### Connector reconnect preserves correctness
 
-1. Start the happy-path scenario with realtime observation forced.
-2. Disconnect or restart the Chatto connector after the approval request is posted and before the human reply.
-3. Playwright posts `/ar approve <decision-id>`.
-4. The connector must reconnect, recover through realtime replay if available or polling catch-up, and write exactly one approval event.
-5. The event must identify whether realtime or polling produced the recovered observation.
+Run reconnect coverage separately for each observation mode:
+
+- `realtime`: disconnect or restart the connector after the approval request is posted, wait for the realtime subscription to reconnect, then have Playwright post `/ar approve <decision-id>`. The approval event must record `observation_mode=realtime`.
+- `polling`: stop the connector after the approval request is posted, have Playwright post `/ar approve <decision-id>`, restart the connector, and require polling catch-up from the stored cursor. The approval event must record `observation_mode=polling`.
+
+Both variants must write exactly one approval event.
 
 ## Failure handling
 
@@ -255,6 +264,7 @@ Passing means:
 - AgentRoom observes that real Chatto message
 - realtime and polling observation-mode variants both pass
 - malformed-command and wrong-thread negative scenarios do not create approval events
+- Chatto auth failure fails closed without synthetic approvals
 - readiness/evidence update from the observed message
 - no manual pre-seeding of approval events is used
 - all artifacts needed to debug a failure are available

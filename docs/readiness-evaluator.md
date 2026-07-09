@@ -101,6 +101,8 @@ Decision gates should be normalized before readiness evaluation:
 | Architecture approval | Policy or human request requires it | Missing approval -> `risky`; denied -> `blocked` |
 | Release approval | Future deployment automation | Missing approval -> `risky`; denied -> `blocked` |
 
+The evaluator should read gate state from `chatto_gate_state`, not derive current gate status by replaying the full event log. The event log remains the audit source; `chatto_gate_state` is the latest-value source for readiness decisions.
+
 ## Check run conclusion mapping
 
 | Readiness state | Check conclusion |

@@ -11,6 +11,7 @@
 
 ## Milestone 1: Chatto repo room and GitHub evidence packet
 
+- Go `agentroom` CLI/server scaffold
 - Single-process `agentroom server`
 - SQLite event store
 - SQLite latest-value runtime state

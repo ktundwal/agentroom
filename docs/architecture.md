@@ -121,6 +121,8 @@ See [`evidence-packet-format.md`](evidence-packet-format.md) for the exact stick
 
 The MVP runtime should be a single long-running `agentroom server` process with an HTTP webhook receiver, local agent-event ingestion, Chatto connector worker, readiness evaluator, evidence publisher, and SQLite event store.
 
+The first implementation language should be Go. TypeScript/Playwright can be used for the Chatto-backed E2E harness, but the production runtime should ship as a Go binary.
+
 See [`runtime-architecture.md`](runtime-architecture.md) for process boundaries, state sharing, deployment mode, and non-goals.
 See [`state-model.md`](state-model.md) for append-only event history, latest-value runtime state, and the evaluator read path.
 See [`readiness-evaluator.md`](readiness-evaluator.md) for deterministic readiness decisions.

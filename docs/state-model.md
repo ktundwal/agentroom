@@ -99,7 +99,7 @@ Latest review state per reviewer.
 
 ### `chatto_thread_state`
 
-Latest Chatto binding and decision state.
+Latest Chatto room/thread binding and observation cursor.
 
 | Column | Purpose |
 | --- | --- |
@@ -107,9 +107,30 @@ Latest Chatto binding and decision state.
 | `chatto_room_id` | Bound Chatto room. |
 | `chatto_thread_id` | Bound Chatto thread. |
 | `last_seen_event_id` | Realtime or polling cursor. |
-| `latest_decision` | approved, rejected, paused, redirected, or null. |
-| `latest_decision_by` | Human who made the decision. |
+| `last_observation_mode` | `realtime` or `polling`, for diagnostics. |
 | `updated_at` | Last Chatto sync time. |
+
+### `chatto_gate_state`
+
+Latest decision state per human gate.
+
+Use one row per `(session_id, gate)` so simultaneous plan, sensitive-path, and architecture gates can be evaluated without replaying the event log.
+
+| Column | Purpose |
+| --- | --- |
+| `session_id` | AgentRoom session. |
+| `gate` | Normalized gate name, such as `plan`, `sensitive-paths`, or `architecture`. |
+| `decision_id` | Current decision prompt ID shown in Chatto. |
+| `required` | Whether the gate is required by policy. |
+| `state` | `pending`, `approved`, `rejected`, `paused`, `redirected`, or `not_required`. |
+| `decided_by` | Human who made the latest decision, or null. |
+| `decision_source` | `chatto`, `policy`, or future source. |
+| `chatto_room_id` | Chatto room containing the decision thread. |
+| `chatto_thread_id` | Chatto thread containing the decision. |
+| `chatto_message_id` | Chatto message that produced the latest decision, or null for pending gates. |
+| `observation_mode` | `realtime` or `polling` for Chatto-observed decisions. |
+| `decided_at` | Source timestamp for the decision, or null. |
+| `updated_at` | Last gate-state update time. |
 
 ### `readiness_snapshots`
 
@@ -137,7 +158,8 @@ The readiness evaluator should read:
 3. `github_check_state`
 4. `github_review_state`
 5. `chatto_thread_state`
-6. relevant recent `event_log` entries for provenance and evidence notes
+6. `chatto_gate_state`
+7. relevant recent `event_log` entries for provenance and evidence notes
 
 It should not call GitHub or Chatto directly. If state is stale, the evaluator should return `blocked` or `risky` with a stale-data reason and let connectors refresh facts.
 

@@ -124,7 +124,8 @@ Required negative Chatto-backed E2E scenarios:
 
 - malformed human command in the correct thread is ignored, produces the documented parse-error clarification, and does not create an approval event
 - valid-looking command in the wrong room or thread is ignored and does not create an approval event
-- connector disconnect/reconnect between approval request and human reply still creates exactly one approval event
+- invalid or expired Chatto connector credentials mark the connector unhealthy, fail closed, and do not create approval events
+- connector disconnect/reconnect coverage runs separately for forced realtime and forced polling, and each mode creates exactly one approval event with the matching observation mode
 
 See [`superpowers/specs/2026-07-09-chatto-e2e-design.md`](superpowers/specs/2026-07-09-chatto-e2e-design.md) for the full design.
 

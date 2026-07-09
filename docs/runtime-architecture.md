@@ -16,6 +16,20 @@ Why:
 
 Docker Compose can wrap the binary for local trials, but AgentRoom should not require Compose internally. GitHub Action mode can come later for stateless evidence regeneration, not for the first realtime loop.
 
+## Implementation language
+
+Use **Go** for the first `agentroom` binary.
+
+Why:
+
+- Go fits the single-binary, self-hosted runtime model.
+- Chatto's backend and public protobuf/ConnectRPC APIs are already Go-friendly.
+- The GitHub webhook receiver, local HTTP APIs, file watcher, SQLite access, and background workers are straightforward in one Go process.
+- Cross-platform binary distribution is simpler than requiring a Node.js runtime for operators.
+- AgentRoom can still use TypeScript/Playwright for the Chatto-backed E2E harness without making Node.js part of the production runtime.
+
+AgentRoom should generate or vendor API clients from public schemas where needed. It should not import Chatto server internals.
+
 ## Process model
 
 One `agentroom server` process runs these components:
@@ -59,11 +73,11 @@ Latest-value state:
 - sessions
 - repo bindings
 - Chatto room/thread bindings
+- Chatto per-gate decision state
 - GitHub PR bindings
 - current GitHub PR state
 - current GitHub check/status state
 - current GitHub review state
-- current Chatto decision state
 - processed GitHub delivery IDs
 
 SQLite is enough for a single self-hosted AgentRoom instance and avoids introducing a second infrastructure dependency before the merge-confidence loop is proven.
@@ -163,7 +177,4 @@ MVP deployment should support:
 
 ## Open questions
 
-- Which language should the first binary use?
-- Should the file watcher be enabled by default or only in local/dev mode?
-- Which language should the first binary use?
 - Should the file watcher be enabled by default or only in local/dev mode?
