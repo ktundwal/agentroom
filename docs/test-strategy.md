@@ -65,7 +65,7 @@ Golden tests should normalize timestamps and evidence versions so diffs stay rea
 
 ### End-to-end fixture test
 
-The first E2E test should run without live Chatto or GitHub:
+The offline fixture E2E should run without live Chatto or GitHub:
 
 1. Create a temporary SQLite database.
 2. Load a test `agentroom.toml`.
@@ -83,6 +83,32 @@ state=ready
 check_conclusion=success
 evidence_contains=AgentRoom evidence: ready
 ```
+
+### Required Chatto-backed E2E
+
+The full integration gate must include a real Chatto instance. It should start Chatto from a local source checkout, drive the human approval through Chatto's browser UI, and require AgentRoom to observe that real Chatto message before writing the approval event.
+
+Required provider:
+
+```sh
+CHATTO_E2E_PROVIDER=source
+CHATTO_REPO=/Users/kapil/github/chatto
+```
+
+Required flow:
+
+1. Build or reuse a bootstrap-enabled Chatto binary from the local Chatto checkout.
+2. Start Chatto with a fresh data directory and wait for `/readyz`.
+3. Start AgentRoom with a temporary config and SQLite database.
+4. Ingest fixture agent events and deterministic GitHub fixture events.
+5. AgentRoom posts the Chatto thread root and approval request.
+6. Playwright logs in as a maintainer and replies `/ar approve <decision-id>` through the real Chatto UI.
+7. AgentRoom observes the Chatto reply through the connector's realtime listener or polling fallback.
+8. AgentRoom writes the Chatto-derived approval event, recomputes readiness, and republishes evidence.
+
+This test must not synthesize the Chatto approval event. The approval event is valid only if it includes the real Chatto room ID, thread ID, message ID, actor, gate, decision ID, and parsed command.
+
+See [`superpowers/specs/2026-07-09-chatto-e2e-design.md`](superpowers/specs/2026-07-09-chatto-e2e-design.md) for the full design.
 
 ### Head-SHA consistency tests
 
@@ -105,16 +131,22 @@ Duplicates must not create duplicate event rows, duplicate PR comments, duplicat
 
 ## Live integration tests
 
-Live Chatto and GitHub tests should be optional and excluded from default CI.
+The source-backed Chatto E2E is the required live integration test for the Chatto connector. Live GitHub tests should remain optional until the Chatto connector loop is proven.
 
-Suggested opt-in flags:
+Required local-source Chatto settings:
+
+```sh
+CHATTO_E2E_PROVIDER=source
+CHATTO_REPO=/Users/kapil/github/chatto
+```
+
+Optional live-GitHub smoke setting:
 
 ```sh
 AGENTROOM_LIVE_GITHUB=1
-AGENTROOM_LIVE_CHATTO=1
 ```
 
-Default CI should use fake clients and recorded webhook fixtures.
+Default CI can keep fake-client and recorded-webhook tests for fast feedback, but the Chatto connector milestone is not complete until the source-backed Chatto E2E passes.
 
 ## Test fixtures
 
@@ -139,5 +171,6 @@ Before merging implementation changes, the default test command should prove:
 - GitHub webhook fixture tests pass
 - config validation tests pass
 - E2E fixture test passes
+- source-backed Chatto E2E passes for Chatto connector changes
 
-No live service should be required for the default gate.
+No live GitHub service should be required for the default gate.

@@ -14,6 +14,8 @@ The MVP should use **bring your own Chatto**:
 
 AgentRoom should not install, upgrade, or operate Chatto in the first MVP.
 
+Exception: the required Chatto connector E2E test should start a local Chatto instance from a source checkout so the connector can be verified against real Chatto behavior before manual testing. That test harness is not the production deployment model.
+
 ## Why not bundle Chatto first?
 
 Bundling Chatto would make trials easier, but it would also expand AgentRoom into deployment and operations before the merge-confidence loop is proven.
