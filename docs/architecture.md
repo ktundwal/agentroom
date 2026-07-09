@@ -31,6 +31,8 @@ Chatto does not currently appear to expose a dedicated bot/webhook API. The init
 
 Operator API access is optional bootstrap plumbing only. It is root-equivalent, Unix-socket-only, and should not be required for normal AgentRoom operation.
 
+See [`chatto-message-format.md`](chatto-message-format.md) for the message formats and human response protocol used by the Chatto connector.
+
 ### GitHub App
 
 The GitHub App observes issues, pull requests, checks, reviews, labels, and comments. It should post evidence packets and expose status checks that can be used as branch protection rules.
@@ -83,7 +85,7 @@ Initial GitHub-derived events:
 
 ### Chatto connector events
 
-The Chatto connector owns human decisions made in Chatto. It must translate Chatto messages, reactions, or commands into internal AgentRoom events in the same event log.
+The Chatto connector owns human decisions made in Chatto. It must translate explicit Chatto decision commands into internal AgentRoom events in the same event log. Reactions may be recorded as hints, but they are not authoritative approval signals in the MVP.
 
 Initial Chatto-derived events:
 
@@ -123,6 +125,7 @@ See [`runtime-architecture.md`](runtime-architecture.md) for process boundaries,
 See [`state-model.md`](state-model.md) for append-only event history, latest-value runtime state, and the evaluator read path.
 See [`readiness-evaluator.md`](readiness-evaluator.md) for deterministic readiness decisions.
 See [`configuration.md`](configuration.md) for the TOML config schema used by `agentroom init` and `agentroom server`.
+See [`test-strategy.md`](test-strategy.md) for the fixture, fake-client, renderer, parser, and evaluator test plan.
 
 ## MVP boundary
 

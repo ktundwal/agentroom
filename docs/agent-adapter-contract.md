@@ -67,19 +67,16 @@ Rules:
 - `occurred_at` must be an ISO-8601 UTC timestamp.
 - `payload` must match the event-specific schema.
 
-## MVP event types
+## MVP agent adapter event types
 
-Start with the smallest set needed to create a useful PR thread and evidence packet:
+Start with the smallest set a coding-agent adapter must produce to create a useful PR thread and evidence packet:
 
 | Event type | Required payload | Purpose |
 | --- | --- | --- |
 | `session.started` | `goal`, `requested_by` | Opens or links an AgentRoom session. |
 | `plan.proposed` | `plan_markdown`, `risk_level`, `sensitive_paths` | Creates the plan gate. |
-| `plan.approved` | `approved_by`, `approval_source` | Allows work to proceed. |
-| `plan.rejected` | `rejected_by`, `reason` | Blocks work before code. |
 | `code.started` | `branch` | Marks implementation as started. |
 | `commit.created` | `sha`, `message` | Records code progress. |
-| `pr.opened` | `number`, `url`, `head_sha` | Links the GitHub PR. |
 | `agent.blocked` | `reason`, `needs_human` | Requests human help. |
 | `evidence.note` | `markdown` | Adds agent-supplied context to the evidence packet. |
 | `session.completed` | `result` | Marks the agent side done. |

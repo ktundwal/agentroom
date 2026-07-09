@@ -27,7 +27,7 @@ The first milestone should prove this narrower claim:
 Chatto currently has a public protobuf/ConnectRPC API and realtime WebSocket direction. Useful surfaces include:
 
 - `MessageService.CreateMessage` for posting room messages and thread replies as the current user
-- `MessageService.AddReaction` and `RemoveReaction` for reaction-based signals
+- `MessageService.AddReaction` and `RemoveReaction` for non-authoritative reaction hints
 - `MessageService.GetMessage` and `BatchGetMessages` for message reads
 - `/api/realtime` for visible event delivery to an authenticated user
 
@@ -49,9 +49,11 @@ The Chatto Operator API may be useful for local bootstrap, such as creating the 
 Until Chatto exposes outgoing webhooks or a formal bot interaction API, AgentRoom has two options:
 
 1. **Realtime listener:** connect to `/api/realtime` as the dedicated Chatto user and watch visible room/thread events.
-2. **Polling fallback:** periodically read the relevant room or thread timeline for structured approval messages or reactions.
+2. **Polling fallback:** periodically read the relevant room or thread timeline for structured approval messages.
 
 The realtime listener is the preferred product experience. Polling is simpler and should remain a fallback for early compatibility.
+
+For the MVP, human decisions should be parsed from explicit `/ar ...` text commands. Reactions may be displayed or recorded as hints, but they should not approve or reject a gate.
 
 ## Chat-agnostic boundary
 
@@ -69,6 +71,8 @@ The boundary should support:
 - link back to GitHub PR evidence
 
 This keeps AgentRoom from depending on unofficial Chatto internals and leaves room for future Slack, Discord, Matrix, or GitHub-only adapters if the market demands them.
+
+See [`chatto-message-format.md`](chatto-message-format.md) for the exact message structure, approval command grammar, ambiguity handling, and event translation rules.
 
 ## Risks
 

@@ -91,12 +91,14 @@ If you want to pilot the workflow before the executable MVP exists, use the temp
 | [`docs/architecture.md`](docs/architecture.md) | Initial system architecture and data flow |
 | [`docs/agent-adapter-contract.md`](docs/agent-adapter-contract.md) | Generic agent event contract and first adapter choice |
 | [`docs/chatto-integration.md`](docs/chatto-integration.md) | Chatto dependency model, connector assumptions, and integration risks |
+| [`docs/chatto-message-format.md`](docs/chatto-message-format.md) | Chatto thread messages, approval commands, parsing rules, and ambiguity handling |
 | [`docs/github-app-design.md`](docs/github-app-design.md) | GitHub App permissions, evidence packets, readiness checks, and fork behavior |
 | [`docs/evidence-packet-format.md`](docs/evidence-packet-format.md) | Sticky PR comment, check run body, packet versioning, and partial-data rendering |
 | [`docs/readiness-evaluator.md`](docs/readiness-evaluator.md) | Deterministic readiness decision tree and conflict resolution |
 | [`docs/runtime-architecture.md`](docs/runtime-architecture.md) | MVP process model, SQLite state, connectors, workers, and deployment |
 | [`docs/state-model.md`](docs/state-model.md) | SQLite event log, latest-value state, evaluator read path, and idempotency |
 | [`docs/configuration.md`](docs/configuration.md) | TOML config schema, required fields, secret handling, and init behavior |
+| [`docs/test-strategy.md`](docs/test-strategy.md) | Unit, connector, renderer, fixture E2E, idempotency, and live-test strategy |
 | [`docs/security.md`](docs/security.md) | Trust, safety, and approval model |
 | [`docs/roadmap.md`](docs/roadmap.md) | Initial development milestones |
 | [`docs/templates/`](docs/templates) | Manual pilot templates |
