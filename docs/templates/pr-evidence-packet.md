@@ -4,6 +4,8 @@
 
 - Session ID:
 - Source issue:
+- Chatto room:
+- Chatto thread:
 - Agent:
 - Branch:
 - Pull request:

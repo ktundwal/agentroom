@@ -1,15 +1,15 @@
 # Contributing
 
-Thanks for helping build AgentDeck.
+Thanks for helping build AgentRoom.
 
 ## Current focus
 
-AgentDeck is in a docs-first planning phase. The most useful contributions are:
+AgentRoom is in a docs-first planning phase. The most useful contributions are:
 
 - sharpening the product wedge
 - improving the manual pilot workflow
 - identifying security and trust failure modes
-- proposing the first GitHub App architecture
+- proposing the first Chatto bot and GitHub App architecture
 - suggesting adapter contracts for coding agents
 
 ## Contribution workflow
@@ -21,11 +21,12 @@ AgentDeck is in a docs-first planning phase. The most useful contributions are:
 
 ## Design bar
 
-AgentDeck should stay narrow until the first MVP proves value:
+AgentRoom should stay narrow until the first MVP proves value:
 
 - make agent-generated PRs reviewable
 - keep humans in control
 - preserve evidence
+- use Chatto for human/agent coordination
 - integrate with GitHub instead of replacing it
 
-Avoid adding broad project-management, chat, or autonomous merge features before the merge-confidence loop works.
+Avoid adding broad project-management, generic chat, or autonomous merge features before the Chatto-native merge-confidence loop works.

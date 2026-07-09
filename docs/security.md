@@ -1,10 +1,11 @@
 # Security and Trust Model
 
-AgentDeck is intended for teams whose coding agents may see private source code, tickets, logs, prompts, and review context. The default posture should be private, least-privilege, and human-supervised.
+AgentRoom is intended for teams whose coding agents may see private source code, tickets, logs, prompts, Chatto discussions, and review context. The default posture should be private, least-privilege, and human-supervised.
 
 ## Principles
 
 - Self-host by default.
+- Use Chatto as the private collaboration surface.
 - GitHub remains the source of truth for code review and merge.
 - Agents get the minimum permissions needed for a task.
 - Humans approve plans and risky actions.
@@ -30,10 +31,11 @@ Sensitive file examples:
 
 ## Audit trail
 
-AgentDeck should record:
+AgentRoom should record:
 
 - who started the session
 - which issue or PR triggered it
+- which Chatto room and thread were used
 - which agent adapter ran
 - which plan was approved
 - which branch and commits were produced
@@ -44,7 +46,7 @@ AgentDeck should record:
 
 ## Secret handling
 
-AgentDeck should not store provider API keys, GitHub tokens, or repository secrets in plaintext. The first implementation should document where credentials live and how they are scoped before supporting production use.
+AgentRoom should not store provider API keys, GitHub tokens, Chatto bot credentials, or repository secrets in plaintext. The first implementation should document where credentials live and how they are scoped before supporting production use.
 
 ## Failure modes to design for
 

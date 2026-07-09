@@ -1,6 +1,6 @@
 ---
 name: Pilot report
-about: Share results from manually piloting the AgentDeck workflow
+about: Share results from manually piloting the AgentRoom workflow
 title: ""
 labels: pilot
 assignees: ""

@@ -3,6 +3,8 @@
 ## Session
 
 - Session ID:
+- Chatto room:
+- Chatto thread:
 - Source issue or PR:
 - Agent:
 - Branch:

@@ -2,11 +2,11 @@
 
 ## One-liner
 
-AgentDeck is the open-source merge-confidence layer for coding agents.
+AgentRoom is the Chatto-native merge desk for agent-authored pull requests.
 
 ## Problem
 
-AI coding agents can create branches and pull requests faster than humans can supervise them. The work is scattered across GitHub tabs, agent chat logs, Slack threads, CI pages, branch names, and human memory.
+AI coding agents can create branches and pull requests faster than humans can supervise them. The work is scattered across GitHub tabs, agent chat logs, Slack threads, chat rooms, CI pages, branch names, and human memory.
 
 That breaks when a maintainer runs multiple agents at once. Reviewers lose track of what was planned, what changed, what failed, what was approved, and what is safe to merge.
 
@@ -23,17 +23,17 @@ Secondary audiences:
 
 ## Wedge
 
-The first product should make one agent-generated PR reviewable and safe to merge.
+The first product should connect one GitHub repo to one Chatto room and make every agent-authored PR easier to decide on.
 
-AgentDeck should not begin as a broad chat product, project-management system, or autonomous agent platform. It should prove trust at the merge boundary.
+AgentRoom should not begin as a broad chat product, project-management system, or autonomous agent platform. It should prove that a Chatto room plus GitHub evidence makes agent PR review faster and safer.
 
 ## Activation moment
 
-A maintainer starts three agent sessions from three issues. AgentDeck approves one plan, blocks one risky plan, tracks CI on the surviving PR, and posts a complete evidence packet so the maintainer can merge without spelunking through chats and tabs.
+A maintainer opens one Chatto repo room and sees three agent PR threads. One is ready, one is blocked by CI, and one needs architecture approval. The maintainer can decide without opening ten tabs or reading raw agent logs.
 
 ## Core promise
 
-AgentDeck answers four questions before merge:
+AgentRoom answers four questions before merge:
 
 1. What was the agent asked to do?
 2. What plan did a human approve?
@@ -42,13 +42,13 @@ AgentDeck answers four questions before merge:
 
 ## Differentiators
 
+- Chatto-native collaboration with GitHub-grounded merge decisions
 - Self-hosted and private by default
-- GitHub-native instead of chat-native
 - Adapter-based for existing coding agents
 - Evidence packet instead of raw logs
-- Plan gate before code
+- Repo room and PR thread instead of scattered chat
 - Human approval before risky actions
 
 ## Tagline
 
-Run coding agents like an engineering team, not a pile of chats.
+Every repo gets a room. Every agent PR gets a decision.

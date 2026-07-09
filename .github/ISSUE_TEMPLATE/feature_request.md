@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Propose an AgentDeck feature
+about: Propose an AgentRoom feature
 title: ""
 labels: enhancement
 assignees: ""
@@ -16,7 +16,7 @@ How do teams handle this today?
 
 ## Proposed behavior
 
-What should AgentDeck do?
+What should AgentRoom do?
 
 ## Evidence packet impact
 

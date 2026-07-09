@@ -1,16 +1,18 @@
-# AgentDeck
+# AgentRoom
 
-**AgentDeck (`ad`) is the open-source merge-confidence layer for coding agents.**
+**AgentRoom (`ar`) is the Chatto-native merge desk for agent-authored pull requests.**
 
-AI coding agents can now create branches and pull requests faster than humans can supervise them. The bottleneck is no longer writing code. It is knowing which agent did what, whether it followed the plan, whether CI and review passed, and whether a human approved the risky parts before merge.
+AI coding agents can now create branches and pull requests faster than humans can supervise them. The bottleneck is no longer writing code. It is knowing which agent PR is ready, blocked, risky, or waiting on human judgment.
 
-AgentDeck gives GitHub teams a private control room for supervised agent work. Start from an issue or pull request, track the agent session, require a plan before code, watch the branch, aggregate CI and review status, request explicit human approvals, and publish one evidence packet back to the PR.
+AgentRoom uses **Chatto** as the live human/agent collaboration surface and **GitHub** as the source of truth. Each repo gets a Chatto room. Each agent-authored PR gets a thread. Agent bots post intent, plans, branch links, CI state, blockers, evidence summaries, and approval requests. Humans approve, reject, pause, or redirect from the room. AgentRoom records the decisions, applies readiness policy, tracks GitHub state, and posts evidence packets back to PRs.
 
-> **Tagline:** Run coding agents like an engineering team, not a pile of chats.
+The technical bet is simple: combine Chatto's self-hosted collaboration UX and NATS-backed realtime foundation with GitHub's code-review and branch-protection model.
+
+> **Tagline:** Every repo gets a room. Every agent PR gets a decision.
 
 ## Status
 
-AgentDeck is in early open-source planning. This repository currently contains the product brief, architecture direction, safety model, and pilot workflow templates. The first executable MVP will focus on GitHub-native agent session tracking and PR evidence packets.
+AgentRoom is in early open-source planning. This repository currently contains the product brief, architecture direction, safety model, and pilot workflow templates. The first executable MVP will focus on one GitHub repo connected to one Chatto room, with every agent-authored PR classified as `needs review`, `blocked`, `risky`, or `ready`.
 
 ## Who this is for
 
@@ -19,38 +21,39 @@ AgentDeck is in early open-source planning. This repository currently contains t
 - Platform and DevEx teams building internal agent workflows
 - Technical founders who want more agent throughput without giving up control
 
-## What AgentDeck is
+## What AgentRoom is
 
-- A self-hosted, GitHub-native trust layer for coding agents
-- A session timeline for agent work
-- A plan gate before code changes
-- A PR evidence packet generator
+- A Chatto-native room for each GitHub repo
+- A PR thread for each agent-authored pull request
+- A merge-confidence state machine for agent work
 - A human approval and policy checkpoint
-- An append-only audit trail across agents, humans, CI, and reviews
+- A PR evidence packet generator
+- An append-only audit trail across agents, humans, CI, Chatto, and GitHub
 
-## What AgentDeck is not
+## What AgentRoom is not
 
 - Not a foundation model
 - Not an IDE
 - Not Jira
-- Not team chat
+- Not a general team chat product
 - Not an autonomous merge bot
 - Not a replacement for GitHub pull requests
 
 ## MVP scope
 
-The first version should prove one narrow outcome: **make one agent-generated PR reviewable and safe to merge.**
+The first version should prove one narrow outcome: **connect one GitHub repo to one Chatto room and make agent-authored PRs easier to decide on.**
 
 Planned MVP components:
 
 1. GitHub App
-2. Agent session registry
-3. Required plan gate
-4. Branch, PR, and CI tracking
-5. Human approval check
-6. PR evidence packet
-7. Append-only event log
-8. Basic adapters for existing coding agents
+2. Chatto bot integration
+3. Repo room binding
+4. PR thread creation
+5. Readiness state machine
+6. Human approval prompts in Chatto
+7. PR evidence packet
+8. Append-only event log
+9. Generic agent event webhook or one runner adapter
 
 ## Get started
 
