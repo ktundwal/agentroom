@@ -52,7 +52,9 @@ The session registry tracks each agent run and PR thread:
 
 ### Agent adapters
 
-AgentRoom should not require one specific coding agent. Adapters should normalize events from different agents into the same session model.
+AgentRoom should not require one specific coding agent. The first adapter should be a generic local event adapter so the merge-confidence loop can be tested before depending on a vendor-specific agent API.
+
+See [`agent-adapter-contract.md`](agent-adapter-contract.md) for the event envelope, MVP event types, readiness mapping, and fixture stream.
 
 Initial adapter events:
 
@@ -89,6 +91,8 @@ Initial policies:
 
 The evidence packet summarizes the session for reviewers. It should be posted to the PR and updated as Chatto, GitHub, and agent events change.
 
+See [`github-app-design.md`](github-app-design.md) for the GitHub App permissions, sticky PR comment, readiness check, branch protection behavior, and fork PR handling.
+
 ## MVP boundary
 
 The MVP should avoid custom CI, custom merge systems, dashboards, and multi-agent orchestration. Chatto should provide the collaboration surface, and GitHub should remain the source of truth for pull requests, checks, reviews, and merge.
@@ -96,7 +100,7 @@ The MVP should avoid custom CI, custom merge systems, dashboards, and multi-agen
 ## Open questions
 
 - Which Chatto API surface should the first connector use?
-- Which coding agent adapter should be built first?
+- Which agent-specific adapter should follow the generic local event adapter?
 - Should the first runtime be a single binary, Docker Compose, or GitHub Action?
 - Should the event log begin as SQLite before moving to a server-backed store?
 - Which policies should be configurable in version one?

@@ -67,7 +67,9 @@ There is no application runtime yet. Start by reading:
 ```sh
 open docs/product-brief.md
 open docs/architecture.md
+open docs/agent-adapter-contract.md
 open docs/chatto-integration.md
+open docs/github-app-design.md
 open docs/security.md
 ```
 

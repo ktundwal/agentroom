@@ -89,7 +89,9 @@ If you want to pilot the workflow before the executable MVP exists, use the temp
 | [`docs/getting-started.md`](docs/getting-started.md) | Contributor and pilot workflow guide |
 | [`docs/product-brief.md`](docs/product-brief.md) | Product pitch, target user, wedge, and MVP |
 | [`docs/architecture.md`](docs/architecture.md) | Initial system architecture and data flow |
+| [`docs/agent-adapter-contract.md`](docs/agent-adapter-contract.md) | Generic agent event contract and first adapter choice |
 | [`docs/chatto-integration.md`](docs/chatto-integration.md) | Chatto dependency model, connector assumptions, and integration risks |
+| [`docs/github-app-design.md`](docs/github-app-design.md) | GitHub App permissions, evidence packets, readiness checks, and fork behavior |
 | [`docs/security.md`](docs/security.md) | Trust, safety, and approval model |
 | [`docs/roadmap.md`](docs/roadmap.md) | Initial development milestones |
 | [`docs/templates/`](docs/templates) | Manual pilot templates |

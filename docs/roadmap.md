@@ -13,11 +13,13 @@
 
 - Experimental Chatto connector
 - GitHub App scaffold
+- GitHub App permissions from `docs/github-app-design.md`
 - Repo room binding
 - PR thread creation
 - Approved plan storage
 - PR evidence packet generation
 - CI status aggregation
+- `AgentRoom readiness` check run
 
 ## Milestone 2: Readiness and policy gates
 
@@ -31,7 +33,7 @@
 ## Milestone 3: Agent event ingestion
 
 - Generic agent event webhook
-- First coding-agent adapter or runner bridge
+- Generic local event adapter from `docs/agent-adapter-contract.md`
 - Event ingestion
 - Chatto status updates
 - Realtime Chatto event listener or timeline polling fallback
